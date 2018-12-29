@@ -1,0 +1,14 @@
+[
+    {
+        "id":"123",
+        "label":"Order 1",
+        "customer":"Drew",
+        "description":"First order"
+    },
+    {
+        "id":"1234",
+        "label":"<b>Order 2 with HTML</b>",
+        "customer":"Drew",
+        "description":"HTML styling should be escaped"
+    }
+]

@@ -1,0 +1,41 @@
+{
+  "name": "orders-frontend",
+  "description": "Portal for orders",
+  "author": "Drew Corlin",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "grunt start",
+    "standalone": "grunt start --standalone",
+    "build": "eslint app && grunt build",
+    "server": "open 'http://localhost:8080' && http-server --cors",
+    "lint": "eslint app",
+    "lint-fix": "eslint app --fix",
+    "test": "echo test"
+  },
+  "dependencies": {
+    "backbone": "~1.3.3",
+    "backbone.marionette": "~3.0.0",
+    "jquery": "~3.3.1",
+    "underscore": "~1.8.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babelify": "^7.2.0",
+    "eslint": "^2.11.1",
+    "grunt": "^1.0.0",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-http": "^2.3.1",
+    "http-server": "^0.11.1",
+    "jstify": "^0.14.0",
+    "toastr": "^2.1.4"
+  }
+}

@@ -1,0 +1,65 @@
+@import "./variables.less";
+
+.hidden {
+    display: none;
+}
+
+.low-btn {
+    height: 25px;
+    width: 120px;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+    border: 0;
+    margin: 0px 5px 0px 5px;
+    background-color: white;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        background-color: @low-btn-click-color;
+    }
+}
+
+.med-btn {
+    background-color: @main-color;
+    height: 25px;
+    width: 120px;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+    border: 0;
+    margin: 0px 5px 0px 5px;
+    &:hover {
+        cursor: pointer;
+    }
+    &:active {
+        background-color: @med-btn-click-color;
+    }
+}
+
+.text-input {
+    border-radius: 2px;
+    font-size: 14px;
+    border: 1px solid @input-border-color;
+    margin: 0px 5px 0px 5px;
+    width: 120px;
+    padding: 2px 0px 2px 5px;
+    &--disabled {
+        background-color: @text-input-disabled-color;
+    }
+    &--error {
+        border: 1px solid red;
+    }
+}
+
+.select-input {
+    border: 1px solid @input-border-color; 
+    height: 20px;
+    width: 30px;
+    background-color: white;
+    border-radius: 0px;
+    &--error {
+        border: 1px solid red;
+    }
+}
