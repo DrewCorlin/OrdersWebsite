@@ -18,12 +18,15 @@ export default Marionette.View.extend({
     },
 
     onRender: function() {
-        this.showChildView('contentRegion', new ChefView({
-            orders: new Entities.Orders([
-                {id: "1", label: "Chicken"},
-                {id: "2", label: "Salmon"}
-            ])
-        }));
+        var view = this;
+        var orderFetch = App.request('fetch:orders');
+        orderFetch.done(function(orders) {
+            view.showChildView('contentRegion', new ChefView({
+                orders: new Entities.Orders(orders)
+            }));
+        }).fail(function(response) {
+            console.log("fail", response); // TODO: Error view
+        });
     },
 
     showToast: function(text) {

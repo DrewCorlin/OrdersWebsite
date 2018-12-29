@@ -1,5 +1,8 @@
-var root = 'http://127.0.0.1:8000/';
+var root = 'http://localhost:8080/';
 
 export default {
-    order: root + 'orders'
+    order: function(id) {
+        return root + 'order/' + id;
+    },
+    orders: root + 'orders'
 };

@@ -11,7 +11,8 @@ var Order = Backbone.Model.extend({
 });
 
 var Orders = Backbone.Collection.extend({
-    model: Order
+    model: Order,
+    url: Urls.orders
 });
 
 export default {

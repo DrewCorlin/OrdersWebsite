@@ -4,6 +4,19 @@
 import Entities from './Entities';
 import { _, App } from  '../../../vendor/vendor';
 
+var Order = {
+    fetch: function() {
+        var order = new Entities.Orders();
+        var defer = $.Deferred();
+        order.fetch().done(function(orders) {
+            defer.resolve(orders);
+        }).fail(function(response) {
+            defer.reject(response);
+        });
+        return defer.promise();
+    }
+};
+
 export default {
     // Expects return from requester
     requests: {
@@ -20,6 +33,9 @@ export default {
             var expiration = new Date();
             expiration.setTime(expiration.getTime() + 2592000); // 30 days, to match backend authToken peristance
             return cookieString + ' expires=' + expiration.toUTCString() + ';';
+        },
+        'fetch:orders': function() {
+            return Order.fetch();
         }
     },
     // No return expected
