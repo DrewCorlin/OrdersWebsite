@@ -15,7 +15,15 @@ var Orders = Backbone.Collection.extend({
     url: Urls.orders
 });
 
+// Error is reserved
+var ErrorModel = Backbone.Model.extend({
+    defaults: {
+        message: null
+    }
+});
+
 export default {
     Order,
-    Orders
+    Orders,
+    ErrorModel
 };

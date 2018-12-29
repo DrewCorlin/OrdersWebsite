@@ -1,6 +1,7 @@
 import { Marionette, App, toast } from '../../vendor/vendor';
 import Entities from './global/Entities';
 import ChefView from './ChefView';
+import ErrorView from './ErrorView';
 import tpl from '../templates/base.tpl';
 
 export default Marionette.View.extend({
@@ -25,7 +26,9 @@ export default Marionette.View.extend({
                 orders: new Entities.Orders(orders)
             }));
         }).fail(function(response) {
-            console.log("fail", response); // TODO: Error view
+            view.showChildView('contentRegion', new ErrorView({
+                model: new Entities.ErrorModel({message: response.responseText})
+            }));
         });
     },
 
