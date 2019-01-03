@@ -6,12 +6,21 @@
     border: 1px solid lightgrey;
     padding-top: 5px;
     padding-bottom: 3px;
-    justify-content: flex-end;
     cursor: pointer;
+}
+
+.order-header-container {
+    display: flex;
+}
+
+.order-description-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .order-view {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
     border: 1px solid lightgrey;
     padding: 10px 10px 10px 10px;
@@ -20,16 +29,18 @@
 .order {
     text-transform: capitalize;
     padding-top: 3px;
+    max-height: 20px;
 }
 
 .customer {
     text-transform: capitalize;
+    max-height: 20px;
     padding-top: 3px;
     margin-left: 5px;
+    color: grey;
 }
 
 .order-description {
     padding-top: 3px;
     margin-left: 5px;
-    color: grey;
 }

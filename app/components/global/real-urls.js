@@ -1,8 +1,13 @@
 var root = 'http://localhost:8080/';
 
 export default {
-    order: function(id) {
-        return root + 'order/' + id;
+    order: function() {
+        return root + 'order/' + this.id;
     },
-    orders: root + 'orders'
+    orders: root + 'orders',
+    meal: function() {
+        return root + 'meal/' + this.id;
+    },
+    meals: root + 'meals',
+    user: root + 'user'
 };

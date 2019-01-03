@@ -6,10 +6,34 @@ import { _, App } from  '../../../vendor/vendor';
 
 var Order = {
     fetch: function() {
-        var order = new Entities.Orders();
+        var ordersFetcher = new Entities.Orders();
         var defer = $.Deferred();
-        order.fetch().done(function(orders) {
+        ordersFetcher.fetch().done(function(orders) {
             defer.resolve(orders);
+        }).fail(function(response) {
+            defer.reject(response);
+        });
+        return defer.promise();
+    },
+    delete: function(id) {
+        var order = new Entities.Order({id});
+        var defer = $.Deferred();
+        console.log(order);
+        order.destroy().done(function(response) { //TODO: Make this work
+            defer.resolve(response);
+        }).fail(function(response) {
+            defer.reject(response);
+        });
+        return defer.promise();
+    }
+};
+
+var Meal = {
+    fetch: function() {
+        var mealsFetcher = new Entities.Meals();
+        var defer = $.Deferred();
+        mealsFetcher.fetch().done(function(meals) {
+            defer.resolve(meals);
         }).fail(function(response) {
             defer.reject(response);
         });
@@ -36,6 +60,12 @@ export default {
         },
         'fetch:orders': function() {
             return Order.fetch();
+        },
+        'delete:order': function(id) {
+            return Order.delete(id);
+        },
+        'fetch:meals': function() {
+            return Meal.fetch();
         }
     },
     // No return expected

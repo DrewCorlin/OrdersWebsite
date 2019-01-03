@@ -1,2 +1,1 @@
-<div class="js-orders-region"></div>
-<div class="js-meals-region"></div>
+<div class="js-content-region"></div>

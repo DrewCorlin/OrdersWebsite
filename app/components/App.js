@@ -1,6 +1,7 @@
 import { Marionette, App, _} from '../../vendor/vendor';
 import GlobalEvents from './global/GlobalEvents';
 import BaseView from './BaseView';
+import Entities from './global/Entities';
 
 export default Marionette.Application.extend({
     region: '#app',
@@ -13,6 +14,7 @@ export default Marionette.Application.extend({
         _.each(GlobalEvents.triggers, function(action, event) {
             App.on(event, action);
         });
-        this.showView(new BaseView());
+        var user = new Entities.User({name: 'Drew C', roles: ['1', '2']});
+        this.showView(new BaseView({model: user}));
     }
 });
