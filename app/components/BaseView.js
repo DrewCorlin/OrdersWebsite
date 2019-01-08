@@ -68,7 +68,7 @@ export default Marionette.View.extend({
                     }));
                 });
                 setTimeout(() => {
-                    if (view.model.get('viewType') !== "orders") { return; }// dont refresh if tab has switched
+                    if (view.model.get('viewType') !== "orders") { return; } // dont refresh if tab has switched
                     view.refreshView();
                 }, 60000); // TODO Task-10: Stop this from queuing too many refreshes
         }

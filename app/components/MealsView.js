@@ -9,12 +9,22 @@ var MealView = Marionette.View.extend({
     ui: {
         descriptionInput: '.js-description-input',
         selectMealButton: '.js-select-meal-button',
-        deleteMealButton: '.js-delete-meal-button'
+        deleteMealButton: '.js-delete-meal-button',
+        textContainer: '.js-text-container',
+        closeModal: '.js-modal-close'
     },
 
     events: {
         'click @ui.selectMealButton': 'onSelectMeal',
-        'click @ui.deleteMealButton': 'onDeleteMeal'
+        'click @ui.deleteMealButton': 'onDeleteMeal',
+        'click @ui.textContainer': 'onClickText',
+        'click @ui.closeModal': 'onModalClose'
+    },
+
+    serializeData: function() {
+        var data = this.serializeModel();
+        data.modalTitle = "Place Order";
+        return data;
     },
 
     onSelectMeal: function() {
@@ -38,6 +48,14 @@ var MealView = Marionette.View.extend({
         }).fail(response => {
             App.trigger('error:toast:show', response);
         });
+    },
+
+    onClickText: function() {
+        this.$('.modal').fadeIn(150);
+    },
+
+    onModalClose: function() {
+        this.$('.modal').fadeOut(150);
     }
 });
 
