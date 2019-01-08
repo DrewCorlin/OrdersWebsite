@@ -1,5 +1,5 @@
 import { Marionette, App } from '../../vendor/vendor';
-import tpl from '../templates/orders.tpl';
+import tpl from '../templates/order.tpl';
 
 var OrderView = Marionette.View.extend({
     template: tpl,
@@ -20,7 +20,7 @@ var OrderView = Marionette.View.extend({
         deleteOrder.done(function(response) {
             App.trigger("refresh:view", "orders");
         }).fail(function(response) {
-            App.trigger('error:toast:show', response); // TODO Task-01: Make sure this works
+            App.trigger('error:toast:show', response);
         });
     }
 });

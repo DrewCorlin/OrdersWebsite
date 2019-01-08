@@ -1,14 +1,5 @@
-<div class="js-text-container text-container">
-    <div class="header-container">
-        <div class="label"> <%- label %> </div>
-    </div>
-    <% if (description) { %>
-        <ul class="description-container">
-            <li class="description"> <%- description %> </li>
-        </ul>
-    <% } %>
-</div>
-<div>
+<div class="create-meal-button-container">
+    <input type="text" name="label" placeholder="label" class="js-label-input text-input">
     <input type="text" name="description" placeholder="description" class="js-description-input text-input">
-    <button class="js-select-meal-button btn">Select</button>
+    <button class="js-create-meal-button btn">Create</button>
 </div>

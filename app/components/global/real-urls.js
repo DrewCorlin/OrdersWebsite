@@ -9,7 +9,10 @@ export default {
     },
     orders: root + 'orders',
     meal: function() {
-        return root + 'meal/' + this.id;
+        if (this.id) {
+            return root + 'meal/' + this.id;
+        }
+        return root + 'meals';
     },
     meals: root + 'meals',
     user: root + 'user'

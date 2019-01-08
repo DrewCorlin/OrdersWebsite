@@ -30,7 +30,7 @@ var Meal = Backbone.Model.extend({
         label: null,
         description: null
     },
-    url: Urls.meal,
+    url: Urls.meal
 });
 
 var Meals = Backbone.Collection.extend({

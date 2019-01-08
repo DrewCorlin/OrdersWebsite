@@ -19,7 +19,7 @@ var Order = {
     delete: function(id) {
         var order = new Entities.Order({id});
         var defer = $.Deferred();
-        order.destroy({dataType: "text"}).done(function(response) { //TODO Task-05: Make this not send OPTIONS request
+        order.destroy({dataType: 'text'}).done(function(response) { //TODO Task-05: Make this not send OPTIONS request
             defer.resolve(response);
         }).fail(function(response) {
             defer.reject(response);
@@ -29,10 +29,14 @@ var Order = {
     create: function(label, customer, description) {
         var order = new Entities.Order({label, customer, description});
         var defer = $.Deferred();
-        order.save(null, {dataType: "text"}).done(function(response) {
+        order.save(null, {dataType: 'text'}).done(function(response) {
             defer.resolve(response);
         }).fail(function(response) {
-            defer.reject(response);
+            if (response.responseText) {
+                defer.reject(JSON.parse(response.responseText).message);
+            } else {
+                defer.reject(response);
+            }
         });
         return defer.promise();
     }
@@ -47,6 +51,20 @@ var Meal = {
             defer.resolve(mealsCollection);
         }).fail(function(response) {
             defer.reject(response);
+        });
+        return defer.promise();
+    },
+    create: function(label, description) {
+        var meal = new Entities.Meal({label, description});
+        var defer = $.Deferred();
+        meal.save(null, {dataType: 'text'}).done(function(response) {
+            defer.resolve(response);
+        }).fail(function(response) {
+            if (response.responseText) {
+                defer.reject(JSON.parse(response.responseText).message);
+            } else {
+                defer.reject(response);
+            }
         });
         return defer.promise();
     }
@@ -80,6 +98,9 @@ export default {
         },
         'fetch:meals': function() {
             return Meal.fetch();
+        },
+        'create:meal': function(label, description) {
+            return Meal.create(label, description);
         }
     },
     // No return expected
