@@ -8,27 +8,36 @@ var MealView = Marionette.View.extend({
 
     ui: {
         descriptionInput: '.js-description-input',
-        selectMealButton: '.js-select-meal-button'
+        selectMealButton: '.js-select-meal-button',
+        deleteMealButton: '.js-delete-meal-button'
     },
 
     events: {
-        'click @ui.selectMealButton': 'onSelectMeal'
-    },
-
-    initialize: function() {
-        this.model.set({isOrder: false});
+        'click @ui.selectMealButton': 'onSelectMeal',
+        'click @ui.deleteMealButton': 'onDeleteMeal'
     },
 
     onSelectMeal: function() {
         var customer = "TEST TEST";
         var description = this.$(this.ui.descriptionInput).val();
         var createOrder = App.request('create:order', this.model.get('label'), customer, description);
-        createOrder.done(function(response) {
+        createOrder.done(response => {
             App.trigger('toast:show', response); // TODO Task-06: Check why duplicates are created
-        }).fail(function(response) {
+        }).fail(response => {
             App.trigger('error:toast:show', response);
         });
         this.$(this.ui.descriptionInput).val(null);
+    },
+
+    // TODO Task-08: Use a modal for confirmation
+    onDeleteMeal: function() {
+        var deleteOrder = App.request('delete:meal', this.model.get('id'));
+        deleteOrder.done(response => {
+            App.trigger('toast:show', response);
+            App.trigger('refresh:view');
+        }).fail(response => {
+            App.trigger('error:toast:show', response);
+        });
     }
 });
 
@@ -53,10 +62,10 @@ export default Marionette.CompositeView.extend({
         var label = this.$(this.ui.labelInput).val();
         var description = this.$(this.ui.descriptionInput).val();
         var createMeal = App.request('create:meal', label, description);
-        createMeal.done(function(response) {
+        createMeal.done(response => {
             App.trigger('toast:show', response);
             App.trigger('refresh:view');
-        }).fail(function(response) {
+        }).fail(response => {
             App.trigger('error:toast:show', response);
         });
     }

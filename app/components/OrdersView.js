@@ -11,10 +11,6 @@ var OrderView = Marionette.View.extend({
         'click @ui.confirm': 'onClickConfirm'
     },
 
-    initialize: function() {
-        this.model.set({isOrder: true});
-    },
-
     onClickConfirm: function(evt) {
         var deleteOrder = App.request('delete:order', this.model.get('id'));
         deleteOrder.done(function(response) {
