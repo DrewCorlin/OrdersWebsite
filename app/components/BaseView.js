@@ -32,11 +32,11 @@ export default Marionette.View.extend({
         this.showChildView('navigationRegion', new NavigationView({model: this.model}));
     },
 
-    showToast: function(text) {
+    showToast: text => {
         toast.success(text);
     },
 
-    showErrorToast: function(text) {
+    showErrorToast: text => {
         toast.error(text, "Error");
     },
 
@@ -49,9 +49,9 @@ export default Marionette.View.extend({
         switch (this.model.get('viewType')) {
             case 'meals':
                 var mealFetch = App.request('fetch:meals');
-                mealFetch.done(function(meals) {
+                mealFetch.done(meals => {
                     view.showChildView('contentRegion', new MealsView({collection: meals}));
-                }).fail(function(response) {
+                }).fail(response => {
                     view.showChildView('contentRegion', new ErrorView({
                         model: new Entities.ErrorModel({message: response.responseText})
                     }));
@@ -62,14 +62,14 @@ export default Marionette.View.extend({
                 break;
             default:
                 var orderFetch = App.request('fetch:orders');
-                orderFetch.done(function(orders) {
+                orderFetch.done(orders => {
                     view.showChildView('contentRegion', new OrdersView({collection: orders}));
-                }).fail(function(response) {
+                }).fail(response => {
                     view.showChildView('contentRegion', new ErrorView({
                         model: new Entities.ErrorModel({message: response.responseText})
                     }));
                 });
-                setTimeout(function() {
+                setTimeout(() => {
                     if (view.model.get('viewType') !== "orders") { return; }// dont refresh if tab has switched
                     view.refreshView();
                 }, 5000);

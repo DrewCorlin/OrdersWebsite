@@ -8,10 +8,10 @@ export default Marionette.Application.extend({
 
     onStart() {
         window.serverSession = {authToken: null};
-        _.each(GlobalEvents.requests, function(action, event) {
+        _.each(GlobalEvents.requests, (action, event) => {
             App.reply(event, action);
         });
-        _.each(GlobalEvents.triggers, function(action, event) {
+        _.each(GlobalEvents.triggers, (action, event) => {
             App.on(event, action);
         });
         var user = new Entities.User({name: 'Drew C', roles: ['1', '2']});

@@ -13,9 +13,9 @@ var OrderView = Marionette.View.extend({
 
     onClickConfirm: function(evt) {
         var deleteOrder = App.request('delete:order', this.model.get('id'));
-        deleteOrder.done(function(response) {
+        deleteOrder.done(response => {
             App.trigger("refresh:view", "orders");
-        }).fail(function(response) {
+        }).fail(response => {
             App.trigger('error:toast:show', response);
         });
     }
