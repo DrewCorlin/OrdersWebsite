@@ -24,8 +24,7 @@ export default Marionette.View.extend({
         App.on('toast:show', this.showToast, this);
         App.on('error:toast:show', this.showErrorToast, this);
         App.on('refresh:view', this.refreshView, this);
-        this.model.set('viewType', 'orders'); // Default to orders for now
-        this.onViewTypeChange();
+        this.model.set('viewType', 'orders'); // TODO Task-03: Use role to determine default view, chef: orders, customer: meals
     },
 
     onRender: function() {
