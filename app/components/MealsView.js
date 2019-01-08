@@ -23,7 +23,6 @@ var MealView = Marionette.View.extend({
         var description = this.$(this.ui.descriptionInput).val();
         var createOrder = App.request('create:order', this.model.get('label'), customer, description);
         createOrder.done(function(response) {
-            console.log(response);
             App.trigger('toast:show', response);
         }).fail(function(response) {
             App.trigger('error:toast:show', response); // TODO Task-01: Make sure this works

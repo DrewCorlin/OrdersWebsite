@@ -33,7 +33,6 @@ export default Marionette.View.extend({
     },
 
     showToast: function(text) {
-        console.log('showing toast', text);
         toast.success(text);
     },
 
