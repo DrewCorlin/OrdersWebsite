@@ -1,9 +1,9 @@
 import { Marionette, App } from '../../vendor/vendor';
-import ordersTpl from '../templates/orders-view.tpl';
+import ordersTpl from '../templates/table-item-view.tpl';
 
 var OrderView = Marionette.View.extend({
     template: ordersTpl,
-    className: 'order-view',
+    className: 'table-view-item',
     ui: {
         confirm: '.js-confirm-order-button'
     },
@@ -12,22 +12,20 @@ var OrderView = Marionette.View.extend({
     },
 
     initialize: function() {
-        console.log(this.model);
+        this.model.set({isOrder: true});
     },
 
     onClickConfirm: function(evt) {
         var deleteOrder = App.request('delete:order', this.model.get('id'));
         deleteOrder.done(function(response) {
-            console.log('deleted', response);
+            App.trigger("refresh:view", "orders");
         }).fail(function(response) {
-            console.log('failed', response);
+            App.trigger('error:toast:show', response); // TODO Task-01: Make sure this works
         });
     }
 });
 
 export default Marionette.CollectionView.extend({
-    initialize: function() {
-        console.log(this.collection);
-    },
-    childView: OrderView
+    childView: OrderView,
+    className: 'table-view'
 });

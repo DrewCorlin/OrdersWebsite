@@ -1,7 +1,7 @@
 import { Marionette, App, toast } from '../../vendor/vendor';
 import Entities from './global/Entities';
-import ChefView from './ChefView';
 import OrdersView from './OrdersView';
+import MealsView from './MealsView';
 import ErrorView from './ErrorView';
 import NavigationView from './NavigationView';
 import tpl from '../templates/base.tpl';
@@ -23,18 +23,17 @@ export default Marionette.View.extend({
     initialize: function() {
         App.on('toast:show', this.showToast, this);
         App.on('error:toast:show', this.showErrorToast, this);
-        this.model.set('isChef', true); // TODO: Update this to use the role
+        App.on('refresh:view', this.refreshView, this);
+        this.model.set('viewType', 'orders'); // Default to orders for now
         this.onViewTypeChange();
     },
 
     onRender: function() {
         this.showChildView('navigationRegion', new NavigationView({model: this.model}));
-        // var view = this.model.get('isChef') ? new ChefView() : new CustomerView();
-        var view = new ChefView();
-        this.showChildView('contentRegion', view);
     },
 
     showToast: function(text) {
+        console.log('showing toast', text);
         toast.success(text);
     },
 
@@ -48,20 +47,39 @@ export default Marionette.View.extend({
 
     onViewTypeChange: function() {
         var view = this;
-        var viewType = this.model.get('viewType') || "orders"; // Default to orders for now
-        if (viewType === "orders") {
-            var orderFetch = App.request('fetch:orders');
-            orderFetch.done(function(orders) {
-                view.showChildView('contentRegion', new OrdersView({collection: new Entities.Orders(orders)}));
-            }).fail(function(response) {
-                view.showChildView('contentRegion', new ErrorView({
-                    model: new Entities.ErrorModel({message: response.responseText})
-                }));
-            });
-        } else if (viewType === "meals") {
-            console.log('meals');
-        } else {
-            console.log('account');
+        switch (this.model.get('viewType')) {
+            case 'meals':
+                var mealFetch = App.request('fetch:meals');
+                mealFetch.done(function(meals) {
+                    view.showChildView('contentRegion', new MealsView({collection: meals}));
+                }).fail(function(response) {
+                    view.showChildView('contentRegion', new ErrorView({
+                        model: new Entities.ErrorModel({message: response.responseText})
+                    }));
+                });
+                break;
+            case 'account':
+                console.log('account');
+                break;
+            default:
+                var orderFetch = App.request('fetch:orders');
+                orderFetch.done(function(orders) {
+                    view.showChildView('contentRegion', new OrdersView({collection: orders}));
+                }).fail(function(response) {
+                    view.showChildView('contentRegion', new ErrorView({
+                        model: new Entities.ErrorModel({message: response.responseText})
+                    }));
+                });
+                setTimeout(function() {
+                    if (view.model.get('viewType') !== "orders") { return; }// dont refresh if tab has switched
+                    view.refreshView();
+                }, 5000);
         }
+    },
+
+    refreshView: function(viewType) {
+        var type = viewType || this.model.get('viewType');
+        this.model.set({viewType: type});
+        this.onViewTypeChange();
     }
 });

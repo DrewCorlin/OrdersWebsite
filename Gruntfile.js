@@ -61,7 +61,7 @@ module.exports  =  function(grunt)  {
                     compress: true
                 },
                 files: {
-                    './public/main.css': ['./app/styles/base.less',  './app/styles/order.less',  './app/styles/common.less',  './node_modules/toastr/build/toastr.min.css']
+                    './public/main.css': ['./app/styles/base.less',  './app/styles/order.less', './app/styles/navigation.less', './app/styles/meal.less',  './app/styles/common.less',  './node_modules/toastr/build/toastr.min.css']
                 }
             }
         },

@@ -4,37 +4,25 @@
     display: none;
 }
 
-.low-btn {
-    height: 25px;
-    width: 120px;
-    border-radius: 3px;
-    font-size: 14px;
-    outline: none;
-    border: 0;
-    margin: 0px 5px 0px 5px;
-    background-color: white;
-    &:hover {
-        cursor: pointer;
-    }
-    &:active {
-        background-color: @low-btn-click-color;
-    }
+.main-content-region {
+    max-height: 95%;
 }
 
-.med-btn {
-    background-color: @main-color;
-    height: 25px;
-    width: 120px;
-    border-radius: 3px;
-    font-size: 14px;
-    outline: none;
-    border: 0;
-    margin: 0px 5px 0px 5px;
-    &:hover {
-        cursor: pointer;
+.btn {
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid @secondary-color;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    cursor: pointer;
+    background: @dark-btn-color;
+    height: 35px;
+    &--active {
+        background: @dark-btn-active-color;
+        box-shadow: 1px 1.5px 5px grey;
     }
     &:active {
-        background-color: @med-btn-click-color;
+        background: @dark-btn-active-color;;
     }
 }
 
@@ -54,7 +42,7 @@
 }
 
 .select-input {
-    border: 1px solid @input-border-color; 
+    border: 1px solid @input-border-color;
     height: 20px;
     width: 30px;
     background-color: white;
@@ -62,4 +50,37 @@
     &--error {
         border: 1px solid red;
     }
+}
+
+.header-container {
+    display: flex;
+}
+
+.description-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.description {
+    padding-top: 3px;
+    margin-left: 5px;
+}
+
+.table-view-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid lightgrey;
+    padding: 10px 10px 10px 10px;
+}
+
+.label {
+    text-transform: capitalize;
+    padding-top: 3px;
+    max-height: 20px;
+}
+
+.table-view {
+    overflow: auto;
+    max-height: 95%;
 }

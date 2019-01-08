@@ -2,7 +2,10 @@ var root = 'http://localhost:8080/';
 
 export default {
     order: function() {
-        return root + 'order/' + this.id;
+        if (this.id) {
+            return root + 'order/' + this.id;
+        }
+        return root + 'orders';
     },
     orders: root + 'orders',
     meal: function() {
