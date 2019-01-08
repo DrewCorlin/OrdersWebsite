@@ -1,8 +1,8 @@
 import { Marionette, App } from '../../vendor/vendor';
-import ordersTpl from '../templates/table-item-view.tpl';
+import tpl from '../templates/meals.tpl';
 
 var MealView = Marionette.View.extend({
-    template: ordersTpl,
+    template: tpl,
     className: 'table-view-item meal',
 
     ui: {
@@ -23,7 +23,7 @@ var MealView = Marionette.View.extend({
         var description = this.$(this.ui.descriptionInput).val();
         var createOrder = App.request('create:order', this.model.get('label'), customer, description);
         createOrder.done(function(response) {
-            App.trigger('toast:show', response);
+            App.trigger('toast:show', response); // TODO Task-06: Check why duplicates are created
         }).fail(function(response) {
             App.trigger('error:toast:show', response); // TODO Task-01: Make sure this works
         });

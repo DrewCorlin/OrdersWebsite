@@ -19,7 +19,7 @@ var Order = {
     delete: function(id) {
         var order = new Entities.Order({id});
         var defer = $.Deferred();
-        order.destroy({dataType: "text"}).done(function(response) { //TODO: Make this not send OPTIONS request
+        order.destroy({dataType: "text"}).done(function(response) { //TODO Task-05: Make this not send OPTIONS request
             defer.resolve(response);
         }).fail(function(response) {
             defer.reject(response);

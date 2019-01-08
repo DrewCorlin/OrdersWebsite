@@ -1,8 +1,8 @@
 import { Marionette, App } from '../../vendor/vendor';
-import ordersTpl from '../templates/table-item-view.tpl';
+import tpl from '../templates/orders.tpl';
 
 var OrderView = Marionette.View.extend({
-    template: ordersTpl,
+    template: tpl,
     className: 'table-view-item',
     ui: {
         confirm: '.js-confirm-order-button'
