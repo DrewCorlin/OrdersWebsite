@@ -5,8 +5,7 @@ import MealsView from './MealsView';
 import ErrorView from './ErrorView';
 import NavigationView from './NavigationView';
 import tpl from '../templates/base.tpl';
-// make orders view, meals view and account view
-// remove chef view and customer view
+
 export default Marionette.View.extend({
     template: tpl,
     className: "base-view",
@@ -71,13 +70,13 @@ export default Marionette.View.extend({
                 setTimeout(() => {
                     if (view.model.get('viewType') !== "orders") { return; }// dont refresh if tab has switched
                     view.refreshView();
-                }, 5000);
+                }, 60000);
         }
     },
 
     refreshView: function(viewType) {
         var type = viewType || this.model.get('viewType');
-        this.model.set({viewType: type});
+        this.model.set({viewType: type}, {silent: true}); // silent since we force refresh below
         this.onViewTypeChange();
     }
 });
